@@ -11,7 +11,7 @@ const Storage = {
         const demoCourses = [
             {
                 id: 'c1', title: 'C++ ЯДРО: АЛГОРИТМИ ТА ООП', 
-                shortDesc: 'Опануйте базові концепції C++, типи даних, цикли та об\'єктно-орієнтоване програмування в середовищі 2070 року.',
+                shortDesc: 'Опануйте базові концепції C++, типи даних, цикли та об\'єктно-орієнтоване програмування в оновленому середовищі.',
                 category: 'Програмування', level: 'Початковий', price: 900, 
                 author: 'Іван Петренко', authorId: 'a1', 
                 cover: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80',
@@ -35,7 +35,7 @@ const Storage = {
             },
             {
                 id: 'c3', title: 'МЕРЕЖА FIVERR: МОНЕТИЗАЦІЯ НАВИЧОК', 
-                shortDesc: 'Покроковий алгоритм для інтеграції у глобальну мережу фрилансерів. Отримайте перші смарт-контракти.',
+                shortDesc: 'Покроковий алгоритм для інтеграції у глобальну мережу. Отримайте перші смарт-контракти.',
                 category: 'Бізнес', level: 'Початковий', price: 500, 
                 author: 'Максим Сидоренко', authorId: 'a3', 
                 cover: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
@@ -72,9 +72,9 @@ const UI = {
         document.getElementById(id).style.display = 'none';
     },
     switchTab(group, targetId) {
-        document.querySelectorAll(`#view-dashboard-${group} .tab-btn`).forEach(b => b.classList.remove('active'));
+        document.querySelectorAll(`#view-dashboard-${group} .btn-tab`).forEach(b => b.classList.remove('active'));
         document.querySelectorAll(`#view-dashboard-${group} .tab-content`).forEach(c => c.classList.remove('active'));
-        event.target.classList.add('active');
+        event.currentTarget.classList.add('active');
         document.getElementById(`${group}-${targetId}`).classList.add('active');
     },
     createCourseCard(course) {
@@ -247,12 +247,12 @@ const Courses = {
         const isPurchased = Auth.currentUser && Storage.get('ss_purchases').some(p => p.userId === Auth.currentUser.id && p.courseId === id);
 
         document.getElementById('cd-header').innerHTML = `
-            <h1 style="color: var(--primary); text-shadow: 0 0 20px rgba(0,243,255,0.3);">${course.title}</h1>
-            <p style="font-size: 18px; opacity: 0.8; max-width: 800px; margin: 0 auto;">${course.shortDesc}</p>
+            <h1 class="text-glow" style="color: var(--primary);">${course.title}</h1>
+            <p style="font-size: 18px; opacity: 0.8; max-width: 800px; margin: 15px auto;">${course.shortDesc}</p>
             <div class="mt-2" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;">
-                <span style="color: var(--accent);">АРХІТЕКТОР:</span> ${course.author} &nbsp;|&nbsp; 
-                <span style="color: var(--accent);">КЛАСТЕР:</span> ${course.category} &nbsp;|&nbsp; 
-                <span style="color: var(--accent);">РІВЕНЬ:</span> ${course.level}
+                <span class="text-accent">АРХІТЕКТОР:</span> ${course.author} &nbsp;|&nbsp; 
+                <span class="text-accent">КЛАСТЕР:</span> ${course.category} &nbsp;|&nbsp; 
+                <span class="text-accent">РІВЕНЬ:</span> ${course.level}
             </div>
         `;
 
@@ -260,7 +260,7 @@ const Courses = {
             <h3 class="section-title">Структура даних</h3>
             <div class="glass-panel" style="padding: 0;">
                 ${course.lessons.map((l, i) => `
-                    <div style="padding:15px 25px; border-bottom:1px solid var(--border-dark); display:flex; gap: 20px; align-items: center;">
+                    <div style="padding:15px 25px; border-bottom:1px solid var(--border); display:flex; gap: 20px; align-items: center;">
                         <span style="color: var(--primary); font-family: 'Rajdhani'; font-size: 18px; font-weight: bold;">БЛОК 0${i+1}</span>
                         <span>${l.title}</span>
                     </div>
@@ -269,12 +269,12 @@ const Courses = {
         `;
 
         document.getElementById('cd-sidebar').innerHTML = `
-            <img src="${course.cover || 'https://via.placeholder.com/400x200?text=DATA'}" alt="Cover" style="width: 100%; border-radius: var(--radius); margin-bottom: 25px; border: 1px solid var(--border-dark);">
+            <img src="${course.cover || 'https://via.placeholder.com/400x200?text=DATA'}" alt="Cover" style="width: 100%; border-radius: var(--radius); margin-bottom: 25px; border: 1px solid var(--border);">
             <div style="font-family: 'Rajdhani'; font-size: 14px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 5px;">ЕНЕРГОЗАТРАТИ:</div>
-            <h2 class="course-price" style="font-size:36px; margin-bottom:25px; color: var(--primary); text-shadow: 0 0 15px rgba(0,243,255,0.4);">${course.price} ₴</h2>
+            <h2 class="course-price text-glow" style="font-size:36px; margin-bottom:25px; color: var(--primary);">${course.price} ₴</h2>
             ${isPurchased 
-                ? `<button class="btn-primary w-100 magnetic-btn" style="padding: 15px; font-size: 16px;" onclick="window.location.hash='#player?id=${course.id}'">СИНХРОНІЗУВАТИ ДАНІ</button>`
-                : `<button class="btn-primary w-100 magnetic-btn" style="padding: 15px; font-size: 16px;" onclick="Cart.add('${course.id}')">ІНІЦІЮВАТИ ТРАНЗАКЦІЮ</button>`
+                ? `<button class="btn btn-primary w-100 magnetic-btn" onclick="window.location.hash='#player?id=${course.id}'">СИНХРОНІЗУВАТИ ДАНІ</button>`
+                : `<button class="btn btn-primary w-100 magnetic-btn" onclick="Cart.add('${course.id}')">ІНІЦІЮВАТИ ТРАНЗАКЦІЮ</button>`
             }
         `;
     }
@@ -327,7 +327,7 @@ const Cart = {
                             <p class="text-muted small">Архітектор: ${c.author}</p>
                         </div>
                         <div style="font-weight:bold; font-size: 22px; font-family: 'Rajdhani'; color: var(--primary); padding: 0 20px;">${c.price} ₴</div>
-                        <button class="btn-outline magnetic-btn" onclick="Cart.remove('${c.id}')">Видалити</button>
+                        <button class="btn btn-outline magnetic-btn" onclick="Cart.remove('${c.id}')">Видалити</button>
                     </div>
                 `;
             }
@@ -371,7 +371,7 @@ const Dashboard = {
                     <img src="${c.cover || 'https://via.placeholder.com/400'}" class="course-cover">
                     <div class="course-info">
                         <h4 style="font-family: 'Rajdhani'; font-size: 20px; letter-spacing: 1px; margin-bottom: 15px;">${c.title}</h4>
-                        <button class="btn-primary mt-1 w-100 magnetic-btn" style="margin-top: auto;" onclick="window.location.hash='#player?id=${c.id}'">АКТИВУВАТИ</button>
+                        <button class="btn btn-primary mt-1 w-100 magnetic-btn" style="margin-top: auto;" onclick="window.location.hash='#player?id=${c.id}'">АКТИВУВАТИ</button>
                     </div>
                 </div>
             `).join('')
@@ -402,7 +402,7 @@ const Editor = {
         this.lessonCount++;
         const div = document.createElement('div');
         div.className = 'form-group pb-1 mb-1';
-        div.style.borderBottom = "1px solid var(--border-dark)";
+        div.style.borderBottom = "1px solid var(--border)";
         div.innerHTML = `
             <input type="text" placeholder="Ідентифікатор блоку ${this.lessonCount}" class="lesson-title mb-1" required style="margin-bottom:10px;">
             <input type="file" accept="video/*" class="lesson-video">
@@ -525,7 +525,7 @@ const Player = {
     }
 };
 
-/* FX & Interactions 2070 */
+/* FX & Interactions */
 const Fx = {
     initCursor() {
         const cursor = document.querySelector('.cursor');
@@ -533,8 +533,17 @@ const Fx = {
         if(!cursor || !follower || window.innerWidth < 900) return;
 
         let mouseX = 0, mouseY = 0, posX = 0, posY = 0;
+        let isCursorVisible = false;
 
         document.addEventListener('mousemove', (e) => {
+            if (!isCursorVisible) {
+                cursor.style.opacity = '1';
+                follower.style.opacity = '1';
+                isCursorVisible = true;
+                posX = e.clientX;
+                posY = e.clientY;
+            }
+
             mouseX = e.clientX;
             mouseY = e.clientY;
             cursor.style.transform = `translate3d(${mouseX - 3}px, ${mouseY - 3}px, 0)`;
@@ -548,11 +557,10 @@ const Fx = {
         }
         renderLoop();
         
-        // Hover effects for links
-        document.querySelectorAll('a, button, .magnetic-btn, .course-card').forEach(el => {
+        document.querySelectorAll('a, button, .magnetic-btn, .course-card, input, select').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 follower.style.transform = `translate3d(${posX - 20}px, ${posY - 20}px, 0) scale(1.5)`;
-                follower.style.backgroundColor = 'rgba(0, 243, 255, 0.1)';
+                follower.style.backgroundColor = 'rgba(225, 29, 46, 0.1)';
             });
             el.addEventListener('mouseleave', () => {
                 follower.style.transform = `translate3d(${posX - 20}px, ${posY - 20}px, 0) scale(1)`;
@@ -564,8 +572,6 @@ const Fx = {
     initMagneticButtons() {
         if(window.innerWidth < 900) return;
         
-        // Need to re-bind on route change if buttons are re-rendered, 
-        // but since most main nav/hero buttons are static in HTML, this works well.
         document.querySelectorAll('.magnetic-btn').forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
@@ -594,11 +600,10 @@ const App = {
         window.addEventListener('hashchange', this.route.bind(this));
         this.route();
         
-        // Init 2070 Visuals
         setTimeout(() => {
             Fx.initCursor();
             Fx.initMagneticButtons();
-        }, 500); // slight delay to ensure DOM is ready
+        }, 500);
     },
 
     route() {
@@ -608,15 +613,14 @@ const App = {
 
         document.querySelectorAll('.view').forEach(v => {
             v.classList.remove('active');
-            v.style.animation = 'none'; // reset animation
+            v.style.animation = 'none'; 
         });
         
         const view = document.getElementById('view-' + path.replace('#', ''));
         if (view) {
             view.classList.add('active');
-            // Trigger reflow for animation restart
             void view.offsetWidth;
-            view.style.animation = 'fadeScale 0.5s ease forwards';
+            view.style.animation = 'fadeIn 0.4s ease forwards';
         }
 
         if (path === '#home') {
@@ -640,9 +644,8 @@ const App = {
         
         window.scrollTo(0,0);
         
-        // Re-bind magnetic buttons for dynamically rendered elements
         setTimeout(() => { Fx.initMagneticButtons(); }, 100);
     }
 };
 
-document.DOMContentLoaded = App.init();
+document.addEventListener('DOMContentLoaded', () => App.init());
