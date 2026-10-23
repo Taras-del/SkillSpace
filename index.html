@@ -2,47 +2,48 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkillSpace 2070 - Елітна освітня нейромережа</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>SkillSpace - Елітна освітня платформа</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- 2070 Background & FX -->
     <div class="atmospheric-glow"></div>
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
     <header class="navbar">
         <div class="container nav-container">
-            <a href="#home" class="logo">SkillSpace<span style="color: var(--primary);">.SYS</span></a>
+            <a href="#home" class="logo">SkillSpace<span class="text-accent">.SYS</span></a>
+            
             <div class="nav-links">
-                <a href="#catalog" class="nav-btn hover-glow">Каталог даних</a>
+                <a href="#catalog" class="btn btn-text magnetic-btn">Каталог даних</a>
                 <div class="search-bar">
                     <input type="text" id="global-search" placeholder="Ініціювати пошук...">
                 </div>
             </div>
+
             <div class="nav-actions">
-                <a href="#author-promo" class="nav-link hidden hover-glow" id="nav-become-author">Стати архітектором</a>
-                <a href="#cart" class="icon-btn hover-glow" aria-label="Сховище">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <a href="#dashboard-author" class="btn btn-text hidden author-only magnetic-btn" id="nav-become-author">Створити модуль</a>
+                <a href="#cart" class="btn btn-icon magnetic-btn" aria-label="Сховище">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     <span id="cart-badge" class="badge">0</span>
                 </a>
                 
-                <div id="auth-buttons">
-                    <button class="btn-outline magnetic-btn" onclick="UI.showModal('auth-modal', 'login')">Ідентифікація</button>
-                    <button class="btn-primary magnetic-btn" onclick="UI.showModal('auth-modal', 'register')">Реєстрація</button>
+                <div id="auth-buttons" class="auth-group">
+                    <button class="btn btn-outline magnetic-btn" onclick="UI.showModal('auth-modal', 'login')">Ідентифікація</button>
+                    <button class="btn btn-primary magnetic-btn" onclick="UI.showModal('auth-modal', 'register')">Реєстрація</button>
                 </div>
 
                 <div id="user-menu" class="hidden">
                     <div class="dropdown">
-                        <button class="btn-profile" id="profile-btn">
+                        <button class="btn btn-text" id="profile-btn">
                             <span id="user-name">Користувач</span> <span class="arrow">▾</span>
                         </button>
                         <div class="dropdown-content glass-panel">
-                            <a href="#dashboard-student" id="link-student-dash">Термінал учня</a>
-                            <a href="#dashboard-author" id="link-author-dash" class="hidden">Термінал автора</a>
-                            <hr style="border-color: var(--border); margin: 10px 0;">
-                            <a href="#" onclick="Auth.logout()" style="color: #ff3366;">Деактивація сесії</a>
+                            <a href="#dashboard-student" id="link-student-dash" class="btn btn-text w-100">Термінал учня</a>
+                            <a href="#dashboard-author" id="link-author-dash" class="btn btn-text w-100 hidden">Термінал автора</a>
+                            <hr class="divider">
+                            <a href="#" onclick="Auth.logout()" class="btn btn-text text-accent w-100">Деактивація сесії</a>
                         </div>
                     </div>
                 </div>
@@ -58,8 +59,8 @@
                     <h1>СИНХРОНІЗУЙ СВОЇ <br><span class="text-glow">НАВИЧКИ З МАЙБУТНІМ</span></h1>
                     <p>Завантажуй знання безпосередньо від провідних архітекторів реальності. Інтерактивні симуляції, нейромережевий дизайн та квантові обчислення.</p>
                     <div class="hero-buttons">
-                        <a href="#catalog" class="btn-primary large magnetic-btn">Знайти симуляцію</a>
-                        <a href="#dashboard-author" class="btn-outline large author-only magnetic-btn">Створити модуль</a>
+                        <a href="#catalog" class="btn btn-primary btn-large magnetic-btn">Знайти симуляцію</a>
+                        <a href="#dashboard-author" class="btn btn-outline btn-large author-only hidden magnetic-btn">Створити модуль</a>
                     </div>
                 </div>
             </div>
@@ -79,7 +80,8 @@
             <h2 class="section-title">Каталог симуляцій</h2>
             <div class="catalog-layout">
                 <aside class="filters glass-panel">
-                    <h3 style="margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">Параметри фільтрації</h3>
+                    <h3>Параметри фільтрації</h3>
+                    <hr class="divider">
                     <div class="form-group">
                         <label>Категорія</label>
                         <select id="filter-category" onchange="Courses.renderCatalog()">
@@ -99,12 +101,12 @@
                             <option value="Просунутий">Архітектор</option>
                         </select>
                     </div>
-                    <button class="btn-outline w-100 magnetic-btn mt-2" onclick="Courses.resetFilters()">Скинути параметри</button>
+                    <button class="btn btn-outline w-100 magnetic-btn mt-2" onclick="Courses.resetFilters()">Скинути параметри</button>
                 </aside>
                 <div class="catalog-content">
-                    <div class="catalog-header glass-panel" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px 20px;">
-                        <span id="catalog-count" style="font-weight: bold; color: var(--primary);">Знайдено: 0</span>
-                        <select id="sort-catalog" onchange="Courses.renderCatalog()" style="width: auto; background: transparent; border-color: var(--primary);">
+                    <div class="catalog-header glass-panel">
+                        <span id="catalog-count" class="catalog-total">Знайдено: 0</span>
+                        <select id="sort-catalog" class="sort-select" onchange="Courses.renderCatalog()">
                             <option value="popular">За популярністю</option>
                             <option value="price-asc">Від найменшої енергії</option>
                             <option value="price-desc">Від найбільшої енергії</option>
@@ -116,10 +118,10 @@
         </section>
 
         <section id="view-course" class="view">
-            <div class="course-header-bg glass-panel" style="border-radius: 0; border-left: none; border-right: none;">
+            <div class="course-header-bg glass-panel border-flush">
                 <div class="container course-header" id="cd-header"></div>
             </div>
-            <div class="container section course-body" style="margin-top: -60px; position: relative; z-index: 10;">
+            <div class="container section course-body">
                 <div class="course-main" id="cd-main"></div>
                 <aside class="course-sidebar glass-panel" id="cd-sidebar"></aside>
             </div>
@@ -128,8 +130,8 @@
         <section id="view-dashboard-student" class="view container section">
             <h2 class="section-title">Термінал учня</h2>
             <div class="tabs">
-                <button class="tab-btn active" onclick="UI.switchTab('student', 'my-courses')">Синхронізовані курси</button>
-                <button class="tab-btn" onclick="UI.switchTab('student', 'favorites')">Закладки</button>
+                <button class="btn btn-tab active" onclick="UI.switchTab('student', 'my-courses')">Синхронізовані курси</button>
+                <button class="btn btn-tab" onclick="UI.switchTab('student', 'favorites')">Закладки</button>
             </div>
             <div id="student-my-courses" class="tab-content active courses-grid"></div>
             <div id="student-favorites" class="tab-content courses-grid"></div>
@@ -137,10 +139,10 @@
 
         <section id="view-dashboard-author" class="view container section">
             <div class="dashboard-layout">
-                <aside class="dash-sidebar glass-panel" style="padding: 10px 0;">
-                    <button class="tab-btn active w-100" style="text-align: left; padding: 15px 20px;" onclick="UI.switchTab('author', 'overview')">Огляд системи</button>
-                    <button class="tab-btn w-100" style="text-align: left; padding: 15px 20px;" onclick="UI.switchTab('author', 'my-courses-author')">Мої модулі</button>
-                    <button class="tab-btn w-100" style="text-align: left; padding: 15px 20px;" onclick="UI.switchTab('author', 'create-course')">Ініціювати курс</button>
+                <aside class="dash-sidebar glass-panel">
+                    <button class="btn btn-tab active w-100 align-left" onclick="UI.switchTab('author', 'overview')">Огляд системи</button>
+                    <button class="btn btn-tab w-100 align-left" onclick="UI.switchTab('author', 'my-courses-author')">Мої модулі</button>
+                    <button class="btn btn-tab w-100 align-left" onclick="UI.switchTab('author', 'create-course')">Ініціювати курс</button>
                 </aside>
                 <div class="dash-content">
                     <div id="author-overview" class="tab-content active">
@@ -151,8 +153,8 @@
                         <h2 class="section-title">Створені модулі</h2>
                         <div class="courses-grid" id="author-courses-list"></div>
                     </div>
-                    <div id="author-create-course" class="tab-content glass-panel" style="padding: 30px;">
-                        <h2 style="margin-bottom: 25px; color: var(--primary);">Протокол створення курсу</h2>
+                    <div id="author-create-course" class="tab-content glass-panel p-lg">
+                        <h2 class="form-title">Протокол створення курсу</h2>
                         <form id="course-editor-form" onsubmit="Editor.saveCourse(event)">
                             <div class="form-group">
                                 <label>Ідентифікатор (Назва)</label>
@@ -177,9 +179,9 @@
                             <div class="form-group">
                                 <label>Блоки даних (Уроки)</label>
                                 <div id="ce-lessons"></div>
-                                <button type="button" class="btn-outline magnetic-btn mt-1" onclick="Editor.addLessonField()">+ Додати блок</button>
+                                <button type="button" class="btn btn-outline magnetic-btn mt-1" onclick="Editor.addLessonField()">+ Додати блок</button>
                             </div>
-                            <button type="submit" class="btn-primary magnetic-btn mt-2 w-100">Завантажити в ядро</button>
+                            <button type="submit" class="btn btn-primary magnetic-btn mt-2 w-100">Завантажити в ядро</button>
                         </form>
                     </div>
                 </div>
@@ -190,47 +192,47 @@
             <div class="player-layout">
                 <div class="player-main">
                     <div id="video-container" class="video-wrapper glass-panel"></div>
-                    <h2 id="player-lesson-title" class="mt-2" style="color: var(--primary);">Завантаження даних...</h2>
-                    <div class="player-controls mt-2 glass-panel" style="padding: 15px; display: flex; gap: 15px;">
-                        <button class="btn-outline magnetic-btn" id="btn-prev-lesson" onclick="Player.prev()">Попередній</button>
-                        <button class="btn-primary magnetic-btn" style="flex-grow: 1;" id="btn-complete-lesson" onclick="Player.markComplete()">Позначити як засвоєне</button>
-                        <button class="btn-outline magnetic-btn" id="btn-next-lesson" onclick="Player.next()">Наступний</button>
+                    <h2 id="player-lesson-title" class="lesson-title mt-2">Завантаження даних...</h2>
+                    <div class="player-controls glass-panel mt-2">
+                        <button class="btn btn-outline magnetic-btn" id="btn-prev-lesson" onclick="Player.prev()">Попередній</button>
+                        <button class="btn btn-primary magnetic-btn flex-grow" id="btn-complete-lesson" onclick="Player.markComplete()">Позначити як засвоєне</button>
+                        <button class="btn btn-outline magnetic-btn" id="btn-next-lesson" onclick="Player.next()">Наступний</button>
                     </div>
                 </div>
-                <aside class="player-sidebar glass-panel" style="margin: 20px; border-radius: 8px;">
-                    <h3 style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">Структура симуляції</h3>
+                <aside class="player-sidebar glass-panel">
+                    <h3 class="sidebar-title">Структура симуляції</h3>
                     <div id="player-playlist" class="playlist"></div>
                 </aside>
             </div>
         </section>
 
         <section id="view-cart" class="view container section">
-            <h2 class="section-title">Сховище даних (Кошик)</h2>
+            <h2 class="section-title">Сховище даних</h2>
             <div class="cart-layout">
                 <div class="cart-items" id="cart-items-container"></div>
                 <aside class="cart-summary glass-panel">
                     <h3>Загальні витрати:</h3>
-                    <div class="total-price" id="cart-total" style="color: var(--primary); font-size: 36px; text-shadow: 0 0 15px rgba(0,243,255,0.4);">0 ₴</div>
-                    <button class="btn-primary w-100 magnetic-btn" onclick="Cart.checkout()">Підтвердити транзакцію</button>
+                    <div class="total-price" id="cart-total">0 ₴</div>
+                    <button class="btn btn-primary w-100 magnetic-btn" onclick="Cart.checkout()">Підтвердити транзакцію</button>
                 </aside>
             </div>
         </section>
     </main>
 
-    <footer class="footer glass-panel" style="margin-top: 60px; border-bottom: none; border-left: none; border-right: none; border-radius: 0;">
-        <div class="container footer-content" style="display: flex; justify-content: space-between; align-items: center; padding: 40px 0;">
+    <footer class="footer glass-panel border-flush mt-lg">
+        <div class="container footer-content">
             <div>
-                <h3 style="color: var(--primary); font-size: 24px; letter-spacing: 2px;">SkillSpace<span style="color: white;">.SYS</span></h3>
-                <p style="opacity: 0.6; margin-top: 5px; font-size: 14px;">Систему ініціалізовано. Рік 2070.</p>
+                <h3>SkillSpace<span class="text-main">.SYS</span></h3>
+                <p>Систему ініціалізовано. Рік 2070.</p>
             </div>
-            <button class="btn-outline magnetic-btn" style="border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6);" onclick="Storage.resetData()">Скинути ядро</button>
+            <button class="btn btn-outline magnetic-btn" onclick="Storage.resetData()">Скинути ядро</button>
         </div>
     </footer>
 
     <div id="auth-modal" class="modal">
-        <div class="modal-content glass-panel" style="border: 1px solid var(--primary); box-shadow: 0 0 40px rgba(0,243,255,0.2);">
-            <span class="close" onclick="UI.closeModal('auth-modal')" style="color: var(--primary);">&times;</span>
-            <h2 id="auth-title" style="margin-bottom: 20px; color: var(--primary);">Ідентифікація</h2>
+        <div class="modal-content glass-panel">
+            <span class="close" onclick="UI.closeModal('auth-modal')">&times;</span>
+            <h2 id="auth-title" class="modal-title">Ідентифікація</h2>
             <form id="auth-form" onsubmit="Auth.handleSubmit(event)">
                 <div id="reg-fields" class="hidden">
                     <div class="form-group">
@@ -253,10 +255,10 @@
                     <label>Ключ шифрування (Пароль)</label>
                     <input type="password" id="auth-password" required>
                 </div>
-                <button type="submit" class="btn-primary w-100 magnetic-btn mt-2" id="auth-submit-btn">Увійти в систему</button>
-                <p class="mt-2 text-center">
-                    <a href="#" id="auth-toggle" onclick="Auth.toggleMode()" style="color: var(--accent); letter-spacing: 1px; font-size: 14px; text-transform: uppercase;">Створити новий профіль</a>
-                </p>
+                <button type="submit" class="btn btn-primary w-100 magnetic-btn mt-2" id="auth-submit-btn">Увійти в систему</button>
+                <div class="text-center mt-2">
+                    <button type="button" class="btn btn-text text-accent text-uppercase" id="auth-toggle" onclick="Auth.toggleMode()">Створити новий профіль</button>
+                </div>
             </form>
         </div>
     </div>
